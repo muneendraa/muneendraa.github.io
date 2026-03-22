@@ -33,65 +33,7 @@
 
     
 
-    /* CUSTOM CURSOR */
-    .cursor {
-      position: fixed;
-      width: 12px;
-      height: 12px;
-      background: var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9999;
-      transform: translate(-50%, -50%) translateZ(0);
-      will-change: transform, left, top;
-      transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 10px rgba(232, 66, 26, 0.4);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
 
-    .cursor::after {
-      content: 'PLAY';
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--white);
-      letter-spacing: 0.1em;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .cursor-ring {
-      position: fixed;
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--gold);
-      border-radius: 50%;
-      pointer-events: none;
-      z-index: 9998;
-      transform: translate(-50%, -50%) translateZ(0);
-      will-change: transform, left, top;
-      transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-      opacity: 0.5;
-    }
-
-    .cursor.hover {
-      width: 60px;
-      height: 60px;
-      background: rgba(232, 66, 26, 0.8);
-      box-shadow: 0 0 20px rgba(232, 66, 26, 0.8);
-      border: 1px solid rgba(240, 236, 228, 0.5);
-    }
-
-    .cursor.hover::after {
-      opacity: 1;
-    }
-
-    .cursor-ring.hover {
-      width: 60px;
-      height: 60px;
-      opacity: 0.2;
-    }
 
     /* NOISE OVERLAY */
     body::before {
@@ -959,9 +901,6 @@ LOADER DISABLED -->
 </div>
 SHOWREEL OVERLAY END -->
 
-<!-- CURSOR -->
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">MR</a>
@@ -1067,7 +1006,7 @@ SHOWREEL OVERLAY END -->
   <div class="motion-grid">
     <!-- Featured large -->
     <div class="gallery-item reveal">
-      <video class="gallery-video" muted loop playsinline>
+      <video class="gallery-video" loop playsinline>
         <source src="assets/motion/car%20animation.mp4" type="video/mp4">
       </video>
       <div class="gallery-overlay">
@@ -1084,7 +1023,7 @@ SHOWREEL OVERLAY END -->
 
     <!-- Small top right -->
     <div class="gallery-item reveal reveal-delay-1">
-      <video class="gallery-video" muted loop playsinline>
+      <video class="gallery-video" loop playsinline>
         <source src="assets/motion/coca.mp4" type="video/mp4">
       </video>
       <div class="gallery-overlay">
@@ -1095,7 +1034,7 @@ SHOWREEL OVERLAY END -->
 
     <!-- Small bottom right -->
     <div class="gallery-item reveal reveal-delay-2">
-      <video class="gallery-video" muted loop playsinline>
+      <video class="gallery-video" loop playsinline>
         <source src="assets/motion/carousel.mp4" type="video/mp4">
       </video>
       <div class="gallery-overlay">
@@ -1116,7 +1055,7 @@ SHOWREEL OVERLAY END -->
   <div class="edits-grid">
     <!-- Edit 1 -->
     <div class="gallery-item reveal vertical-cards">
-      <video class="gallery-video vertical-video" muted loop playsinline>
+      <video class="gallery-video vertical-video" loop playsinline>
         <source src="assets/video/4_fundes_you_nded_Neil_1.mp4" type="video/mp4">
       </video>
       <div class="gallery-overlay">
@@ -1127,7 +1066,7 @@ SHOWREEL OVERLAY END -->
 
     <!-- Edit 2 -->
     <div class="gallery-item reveal reveal-delay-1 vertical-cards">
-      <video class="gallery-video vertical-video" muted loop playsinline>
+      <video class="gallery-video vertical-video" loop playsinline>
         <source src="assets/video/Sequence%2004_2.mp4" type="video/mp4">
       </video>
       <div class="gallery-overlay">
@@ -1138,7 +1077,7 @@ SHOWREEL OVERLAY END -->
 
     <!-- Edit 3 -->
     <div class="gallery-item reveal reveal-delay-2 vertical-cards">
-      <video class="gallery-video vertical-video" muted loop playsinline>
+      <video class="gallery-video vertical-video" loop playsinline>
         <source src="assets/video/SequenceEM.mp4" type="video/mp4">
       </video>
       <div class="gallery-overlay">
@@ -1337,27 +1276,7 @@ SHOWREEL OVERLAY END -->
 
 
 
-  const cursor = document.getElementById('cursor');
-  const ring = document.getElementById('cursorRing');
-  let mouseX = 0, mouseY = 0, ringX = 0, ringY = 0;
-  document.addEventListener('mousemove', e => {
-    mouseX = e.clientX; mouseY = e.clientY;
-    if(cursor) { cursor.style.left = mouseX + 'px'; cursor.style.top = mouseY + 'px'; }
-  });
 
-  (function animateRing() {
-    ringX += (mouseX - ringX) * 0.1;
-    ringY += (mouseY - ringY) * 0.1;
-    ring.style.left = (ringX - 18) + 'px';
-    ring.style.top  = (ringY - 18) + 'px';
-    requestAnimationFrame(animateRing);
-  })();
-
-
-  document.querySelectorAll('a, button, .gallery-item, .tool-item').forEach(el => {
-    el.addEventListener('mouseenter', () => { ring.classList.add('hover'); if(cursor) cursor.classList.add('hover'); });
-    el.addEventListener('mouseleave', () => { ring.classList.remove('hover'); if(cursor) cursor.classList.remove('hover'); });
-  });
 
   // Scroll reveal
   const reveals = document.querySelectorAll('.reveal');
